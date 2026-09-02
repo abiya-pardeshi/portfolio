@@ -312,6 +312,13 @@ body {
   font-size: 0.75rem;
   align-self: flex-start;
 }
+/* CSS for Image Preview approach */
+.mini-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
 /* ===== PROJECTS ===== */
 .projects-grid { 
   display: grid; 
