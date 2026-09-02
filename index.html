@@ -1,4 +1,140 @@
-<!-- VIEW-ONLY RESUME MODAL -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abiya Pardeshi — Data Engineer & BI Analyst</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">ABIYA PARDESHI<span class="dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="status-dot"></span>
+        <span>Data Analyst & Pipeline Engineer</span>
+        <span class="sep">|</span>
+        <span>Goa, India (Remote Eligible)</span>
+      </div>
+
+      <h1 class="hero-name">Data Analytics & Cloud Pipeline Engineer</h1>
+
+      <p class="hero-desc">
+        Specializing in Azure data lake ingestion, serverless SQL transformation layers, automated Power BI reporting systems, and server-side tracking architecture.
+      </p>
+
+      <div class="hero-ctas">
+        <button onclick="openModal('resume-modal')" class="cta-primary">View Resume</button>
+        <a href="#projects" class="cta-ghost">View Case Studies →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-label">01 / ABOUT</div>
+    <div class="about-grid">
+      <div class="about-portrait">
+        <div class="portrait-meta">
+          <div class="portrait-name">Abiya Pardeshi</div>
+          <div class="portrait-role">Jr. Data Analyst · Kilowott</div>
+          <div class="portrait-location">Porvorim, Goa, India</div>
+        </div>
+        <div class="portrait-links">
+          <button onclick="openModal('resume-modal')" class="plink-btn">📄 View Resume (Interactive)</button>
+          <a href="mailto:abiyapardeshi05@gmail.com" class="plink">✉ Email</a>
+          <a href="https://linkedin.com/in/abiya-pardeshi" target="_blank" class="plink">LinkedIn</a>
+        </div>
+      </div>
+      <div class="about-body">
+        <h2 class="section-heading">Bridging cloud pipelines and strategic visualization</h2>
+        <p>
+          I am a Data Analyst with <strong>2+ years of professional experience</strong> engineering data virtualizations, automated pipelines, and enterprise analytics dashboards across Azure and Power BI ecosystems.
+        </p>
+        <p>
+          At Kilowott, I solve core data engineering challenges—from handling dynamic schema drift across cloud data lake partitions to configuring server-side tracking pipelines that ensure 100% data integrity for reporting.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS (3 IN A ROW) -->
+  <section class="section" id="certifications">
+    <div class="section-label">02 / CREDENTIALS</div>
+    <h2 class="section-heading">Verified Certifications</h2>
+
+    <div class="certs-grid">
+      <!-- Cert 1 -->
+      <div class="cert-card" onclick="openCertModal('Google Data Analytics Professional', 'certs/Coursera%20OTRHNRK9XL38.pdf')">
+        <div class="cert-header">
+          <span class="cert-issuer">GOOGLE</span>
+          <span class="cert-badge">Verified</span>
+        </div>
+        <h3 class="cert-title">Google Data Analytics Professional</h3>
+        <p class="cert-desc">Coursera · In-depth SQL, R, and Data Cleaning workflows.</p>
+        <button class="cert-view-btn">View Certificate ↗</button>
+      </div>
+
+      <!-- Cert 2 -->
+      <div class="cert-card" onclick="openCertModal('Advanced GA4 Implementation', 'certs/ga4-gtm.pdf')">
+        <div class="cert-header">
+          <span class="cert-issuer">UDEMY</span>
+          <span class="cert-badge">Verified</span>
+        </div>
+        <h3 class="cert-title">Advanced GA4 & Tag Manager</h3>
+        <p class="cert-desc">Server-Side Tracking, Data Layers & Custom Conversions.</p>
+        <button class="cert-view-btn">View Certificate ↗</button>
+      </div>
+
+      <!-- Cert 3 -->
+      <div class="cert-card" onclick="openCertModal('Python Programming Certification', 'certs/python-cert.pdf')">
+        <div class="cert-header">
+          <span class="cert-issuer">LIBRA COMPUTERS</span>
+          <span class="cert-badge">Verified</span>
+        </div>
+        <h3 class="cert-title">Python Programming Certification</h3>
+        <p class="cert-desc">Advanced Python Scripting, Data Structures & Logic.</p>
+        <button class="cert-view-btn">View Certificate ↗</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-label">03 / CASE STUDIES</div>
+    <h2 class="section-heading">Featured Engineering Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Scalable Marketing Pipeline: Azure Synapse & Power BI</h3>
+        <p>Architected a serverless virtualization layer over ADLS Gen2 to resolve daily Parquet schema drift.</p>
+        <div class="project-tags"><span>Azure Synapse</span><span>T-SQL</span><span>Power BI</span></div>
+      </div>
+      <div class="project-card">
+        <h3>Server-Side Tracking Architecture</h3>
+        <p>Deployed server-side Google Tag Manager (sGTM) containers to bypass ad-blocker loss.</p>
+        <div class="project-tags"><span>sGTM</span><span>GA4</span><span>JavaScript</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW-ONLY RESUME MODAL -->
   <div id="resume-modal" class="modal-overlay" onclick="closeModalOnOuter(event, 'resume-modal')">
     <div class="modal-content">
       <div class="modal-header">
@@ -23,3 +159,11 @@
       </div>
     </div>
   </div>
+
+  <footer class="footer">
+    <span>© 2026 Abiya Pardeshi</span>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
