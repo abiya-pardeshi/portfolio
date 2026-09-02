@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azure Synapse & Power BI Pipeline — Abiya Pardeshi</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Custom Case Study Layout Styles */
+    .case-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+    .case-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .case-tags {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 32px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    .case-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: var(--r);
+      color: var(--text-muted);
+    }
+    .case-section {
+      margin-bottom: 48px;
+    }
+    .case-section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .case-section p, .case-section li {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .problem-box {
+      background: rgba(217, 119, 54, 0.05);
+      border-left: 3px solid var(--accent);
+      padding: 20px;
+      border-radius: 0 var(--r) var(--r) 0;
+      margin-bottom: 24px;
+    }
+    .solution-box {
+      background: rgba(34, 197, 94, 0.05);
+      border-left: 3px solid #22c55e;
+      padding: 20px;
+      border-radius: 0 var(--r) var(--r) 0;
+      margin-bottom: 24px;
+    }
+    .arch-diagram {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: var(--r);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-main);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.4;
+    }
+    .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: var(--r);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    .img-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .img-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .img-caption {
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    .disclaimer-box {
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      padding: 16px;
+      border-radius: var(--r);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">ABIYA PARDESHI<span class="dot">.</span></a>
+    <a href="index.html" class="nav-cta">← Back to Portfolio</a>
+  </nav>
+
+  <main class="case-container">
+    <a href="index.html#projects" class="back-link">← Back to Projects</a>
+
+    <h1 class="case-title">Scalable Marketing Analytics Pipeline: Azure Synapse & Power BI</h1>
+
+    <div class="case-tags">
+      <span class="case-tag">Azure Synapse</span>
+      <span class="case-tag">ADLS Gen2</span>
+      <span class="case-tag">T-SQL Serverless</span>
+      <span class="case-tag">Power BI</span>
+      <span class="case-tag">Parquet</span>
+    </div>
+
+    <!-- PROBLEM & SOLUTION SECTION -->
+    <section class="case-section">
+      <h2>1. Problem & Challenge</h2>
+      <div class="problem-box">
+        <p><strong>The Core Issue: Dynamic Schema Drift</strong></p>
+        <p>
+          Incoming marketing and event Parquet partitions landing in Azure Data Lake Storage (ADLS Gen2) suffered from inconsistent file structures over time. Older daily files contained 5 standard columns, while newer partitions introduced extra columns (e.g., region and ad-group breakdowns), expanding to 7 columns.
+        </p>
+        <p>
+          Directly querying these files via traditional table loads caused hard pipeline failures and broke downstream Power BI refresh cycles due to structural column mismatches.
+        </p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>2. Solution & Work Done</h2>
+      <div class="solution-box">
+        <p><strong>The Fix: Serverless Abstraction Layer</strong></p>
+        <p>
+          Instead of building rigid ETL jobs or provisioning costly SQL databases, I engineered an abstraction virtualization layer using <strong>Azure Synapse Serverless SQL</strong>.
+        </p>
+        <ul>
+          * Configured `EXTERNAL DATA SOURCE` and `EXTERNAL FILE FORMAT` objects directly over ADLS Gen2.
+          * Used `OPENROWSET` with `WITH` schema clauses to query all raw Parquet partitions on-the-fly.
+          * Applied explicit `CAST` and `ISNULL()` handling inside T-SQL views to normalize column count variations across historical partitions.
+          * Connected Power BI to the dynamic T-SQL view, establishing a clean Star Schema and automated DAX calculations without pipeline crashes.
+        </ul>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE FLOW -->
+    <section class="case-section">
+      <h2>3. Pipeline Architecture</h2>
+      <div class="arch-diagram">
+========================================================================================================================
+                                    AZURE SYNAPSE TO POWER BI DATA PIPELINE
+========================================================================================================================
+
+  [ INGESTION ]                [ STORAGE ]                               [ PROCESSING ]
++----------------+          +----------------+                      +---------------------+
+| 1. RAW DATA    |          | 2. ADLS GEN2   |                      | 3. SYNAPSE EXTERNAL |
+| GA4 / CRM /    | -------> | Parquet Files  | -------------------> |    DATA SOURCE &    |
+| Event Data     |          | Dynamic Columns|                      |    FILE FORMAT      |
++----------------+          +----------------+                      +---------------------+
+                                                                               |
+                                                                               v
+  [ VIRTUALIZATION ]           [ SCHEMATIC RESOLUTION ]                  [ SYNAPSE QUERY ]
++----------------+          +----------------+                      +---------------------+
+| 6. VIRTUAL     |          | 5. SCHEMA DRIFT|                      | 4. OPENROWSET       |
+|    BUSINESS    | <------- |    RESOLUTION  | <------------------- |    PARQUET QUERIES  |
+|    LAYER       |          | (ISNULL & Cast)|                      | (On-the-fly execution)
++----------------+          +----------------+                      +---------------------+
+       |
+       v
+  [ VISUALIZATION ]            [ END USER ]
++----------------+          +----------------+
+| 7. POWER BI    |          | 8. STAKEHOLDER |
+| Star Schema    | -------> |    INTERACTIVE |
+| & DAX Measures |          |    DASHBOARDS  |
++----------------+          +----------------+
+      </div>
+    </section>
+
+    <!-- SQL CODE SHOWCASE -->
+    <section class="case-section">
+      <h2>4. Schema Drift Implementation (T-SQL)</h2>
+      <p>Here is the core view abstraction created inside Azure Synapse Serverless SQL to handle variable column counts across raw Parquet files:</p>
+      
+      <div class="code-block">
+<pre>CREATE VIEW vw_marketing_analytics AS
+SELECT 
+    CAST(CampaignID AS VARCHAR(50))                      AS campaign_id,
+    CAST(Impressions AS INT)                             AS impressions,
+    CAST(Clicks AS INT)                                  AS clicks,
+    -- Normalizes missing columns in 5-column files vs 7-column files:
+    ISNULL(CAST(AdGroup AS VARCHAR(50)), 'Unassigned')   AS ad_group,
+    ISNULL(CAST(Region AS VARCHAR(50)), 'Global')        AS region
+FROM OPENROWSET(
+    BULK 'marketing/*/*/*.parquet',
+    DATA_SOURCE = 'AzureDataLakeStore',
+    FORMAT = 'PARQUET'
+) WITH (
+    CampaignID VARCHAR(50),
+    Impressions INT,
+    Clicks INT,
+    AdGroup VARCHAR(50),
+    Region VARCHAR(50)
+) AS [result];</pre>
+      </div>
+    </section>
+
+    <!-- SCREENSHOTS / VISUALS SECTION -->
+    <section class="case-section">
+      <h2>5. Power BI Dashboard Showcase</h2>
+      <p>Below are screenshots of the interactive Power BI reporting suite built over the Synapse SQL abstraction views.</p>
+
+      <div class="gallery-grid">
+        <!-- Dashboard Image 1 -->
+        <div class="img-card">
+          <img src="https://via.placeholder.com/900x500/161920/949ba8?text=Replace+with+your+PBIX+Screenshot+1" alt="Executive Marketing Overview Dashboard" />
+          <div class="img-caption">Figure 1: Executive Marketing Overview — Dynamic KPI Cards, Time Intelligence Trendlines, and Campaign Performance.</div>
+        </div>
+
+        <!-- Dashboard Image 2 -->
+        <div class="img-card">
+          <img src="https://via.placeholder.com/900x500/161920/949ba8?text=Replace+with+your+PBIX+Screenshot+2" alt="Regional Conversion & AdGroup Breakdown" />
+          <div class="img-caption">Figure 2: Regional Performance & AdGroup Breakdown — Powered by normalized schema drift views.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT LINKS -->
+    <section class="case-section">
+      <h2>6. Repository Assets</h2>
+      <p>Explore the full source code, `.sql` dumps, and `.pbix` report files on GitHub:</p>
+      <a href="https://github.com/abiya-pardeshi" target="_blank" class="plink-btn" style="display: inline-block; margin-top: 8px;">
+        View Full Repository on GitHub ↗
+      </a>
+    </section>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <strong>Data Privacy Disclaimer:</strong> All data utilized in this project, SQL scripts, and Power BI report visuals has been fully obfuscated, anonymized, or rendered using synthetic mock records. No proprietary, sensitive, or enterprise business data is disclosed.
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>© 2026 Abiya Pardeshi</span>
+  </footer>
+
+</body>
+</html>
