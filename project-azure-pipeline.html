@@ -159,24 +159,33 @@
           The client approached us with massive volumes of historical and ongoing operational data spanning multiple portfolio companies. The dataset contained complex cross-channel metrics including marketing performance, overall sales, business growth, and ROI.
         </p>
         <p>
-          Each individual company—as well as various specialized internal teams (Sales, Organic Social, Paid Social, Email Marketing, Website Ops, and Executive Business teams)—required distinct, localized views of performance data. The core challenge was centralizing this vast multi-company dataset without exposing confidential cross-brand metrics or departmental figures to unauthorized teams.
+          Each individual company, as well as various specialized internal teams (Sales, Organic Social, Ads Marketing, Email Marketing, Website, and Executive Business teams) required distinct, localized views of performance data. Instead of generating multiple reports across multiple teams and clients along without exposing confidential cross-brand metrics or departmental figures to unauthorized teams was the core challenge.
         </p>
       </div>
     </section>
 
     <section class="case-section">
-      <h2>2. Solution & Work Done</h2>
+      <h2>2. Proposed Solution  & Work Done</h2>
       <div class="solution-box">
-        <p><strong>The Fix: Serverless Abstraction Layer</strong></p>
+        <p><strong>Automated Power BI Reports with Enterprise Row-Level Security (RLS)</strong></p>
         <p>
-          Instead of building rigid ETL jobs or provisioning costly SQL databases, I engineered an abstraction virtualization layer using <strong>Azure Synapse Serverless SQL</strong>.
+          To solve the visibility and scaling challenge, we architected an automated, enterprise-grade Power BI reporting solution integrated with strict **Row-Level Security (RLS)**.
         </p>
         <ul>
-          * Configured `EXTERNAL DATA SOURCE` and `EXTERNAL FILE FORMAT` objects directly over ADLS Gen2.
-          * Used `OPENROWSET` with `WITH` schema clauses to query all raw Parquet partitions on-the-fly.
-          * Applied explicit `CAST` and `ISNULL()` handling inside T-SQL views to normalize column count variations across historical partitions.
-          * Connected Power BI to the dynamic T-SQL view, establishing a clean Star Schema and automated DAX calculations without pipeline crashes.
+          <li><strong>Role-Based Security Architecture:</strong> Embedded DAX-driven Row-Level Security (RLS) rules so that stakeholders, company executives, and departmental heads (e.g., Email Marketing leads vs. Sales leads) automatically see only the data relevant to their specific company and team permissions upon login.</li>
+          <li><strong>Unified Data Engine & Virtualization:</strong> Handled multi-company historical and real-time data integration through an Azure Synapse Serverless SQL virtualization layer to process large volumes seamlessly.</li>
+          <li><strong>Modular 7-Report Dashboard Suite:</strong> Engineered a comprehensive suite of 7 specialized report pages tailored to distinct business functions:</li>
         </ul>
+        
+        <ol style="margin-left: 24px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.8;">
+          <li><strong>Overview Report:</strong> High-level executive summary of multi-company business health, cross-channel ROI, and total revenue.</li>
+          <li><strong>Business Report:</strong> High-level financial KPIs, margin analysis, and corporate performance tracking.</li>
+          <li><strong>Sales Report:</strong> Revenue pipelines, conversion rates, product performance, and sales representative metrics.</li>
+          <li><strong>Paid Social Report:</strong> Ad spend performance, CAC, ROAS, and campaign-level analytics across paid channels.</li>
+          <li><strong>Organic Social Report:</strong> Reach, engagement metrics, audience growth, and organic content performance.</li>
+          <li><strong>Email Marketing Report:</strong> Campaign deliverability, open rates, CTRs, and email-driven conversion pipelines.</li>
+          <li><strong>Website Analytics Report:</strong> Traffic acquisition, user journeys, session durations, and landing page conversions.</li>
+        </ol>
       </div>
     </section>
 
