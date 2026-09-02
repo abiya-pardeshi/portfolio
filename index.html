@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,26 +19,10 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span>
-    </button>
   </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" id="mobileClose" aria-label="Close">✕</button>
-    <ul>
-      <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
-      <li><a href="#experience" onclick="closeMobileMenu()">Experience</a></li>
-      <li><a href="#skills" onclick="closeMobileMenu()">Skills</a></li>
-      <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
-      <li><a href="#research" onclick="closeMobileMenu()">Research</a></li>
-      <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
-    </ul>
-  </div>
 
   <!-- HERO -->
   <section class="hero" id="hero">
@@ -57,30 +41,8 @@
       </p>
 
       <div class="hero-ctas">
-        <a href="#projects" class="cta-primary">View Case Studies</a>
-        <a href="https://github.com/abiya-pardeshi" target="_blank" class="cta-ghost">GitHub Repositories →</a>
-      </div>
-    </div>
-
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-n" data-target="2.1">0</span><span class="stat-u">+ yrs</span>
-        <span class="stat-l">Industry Experience</span>
-      </div>
-      <div class="stat-rule"></div>
-      <div class="stat">
-        <span class="stat-n" data-target="20">0</span><span class="stat-u">+</span>
-        <span class="stat-l">Production Dashboards</span>
-      </div>
-      <div class="stat-rule"></div>
-      <div class="stat">
-        <span class="stat-n" data-target="70">0</span><span class="stat-u">%</span>
-        <span class="stat-l">ETL Cost Reduction</span>
-      </div>
-      <div class="stat-rule"></div>
-      <div class="stat">
-        <span class="stat-n" data-target="1">0</span><span class="stat-u"></span>
-        <span class="stat-l">Springer Publication</span>
+        <button onclick="openModal('resume-modal')" class="cta-primary">View Resume</button>
+        <a href="#projects" class="cta-ghost">View Case Studies →</a>
       </div>
     </div>
   </section>
@@ -88,7 +50,6 @@
   <!-- ABOUT -->
   <section class="section" id="about">
     <div class="section-label">01 / ABOUT</div>
-
     <div class="about-grid">
       <div class="about-portrait">
         <div class="portrait-meta">
@@ -96,300 +57,113 @@
           <div class="portrait-role">Jr. Data Analyst · Kilowott</div>
           <div class="portrait-location">Porvorim, Goa, India</div>
         </div>
-        <div class="portrait-tools">
-          <span>Azure Synapse</span>
-          <span>Power BI</span>
-          <span>SQL (T-SQL)</span>
-          <span>GA4 / GTM</span>
-          <span>Python</span>
-        </div>
         <div class="portrait-links">
+          <button onclick="openModal('resume-modal')" class="plink-btn">📄 View Resume (Interactive)</button>
           <a href="mailto:abiyapardeshi05@gmail.com" class="plink">✉ Email</a>
           <a href="https://linkedin.com/in/abiya-pardeshi" target="_blank" class="plink">LinkedIn</a>
-          <a href="resume.pdf" target="_blank" rel="noopener" class="plink cv-link">Download Resume (PDF)</a>
         </div>
       </div>
-
       <div class="about-body">
         <h2 class="section-heading">Bridging cloud pipelines and strategic visualization</h2>
-
         <p>
           I am a Data Analyst with <strong>2+ years of professional experience</strong> engineering data virtualizations, automated pipelines, and enterprise analytics dashboards across Azure and Power BI ecosystems.
         </p>
         <p>
           At Kilowott, I solve core data engineering challenges—from handling dynamic schema drift across cloud data lake partitions to configuring server-side tracking pipelines that ensure 100% data integrity for reporting.
         </p>
-        <p>
-          I also hold a background in applied machine learning, with published research in <em>Springer Nature (2025)</em> focusing on time series deep learning models and NLP.
-        </p>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section class="section" id="experience">
-    <div class="section-label">02 / EXPERIENCE</div>
-    <h2 class="section-heading">Work History</h2>
+  <!-- CERTIFICATIONS (3 IN A ROW) -->
+  <section class="section" id="certifications">
+    <div class="section-label">02 / CREDENTIALS</div>
+    <h2 class="section-heading">Verified Certifications</h2>
 
-    <div class="timeline">
-      <div class="tl-item active" tabindex="0">
-        <div class="tl-left">
-          <div class="tl-date">Jul 2024 — Present</div>
-          <div class="tl-badge">Full-time</div>
+    <div class="certs-grid">
+      <!-- Cert 1 -->
+      <div class="cert-card" onclick="openCertModal('Google Data Analytics Professional', 'certs/google-analytics.pdf')">
+        <div class="cert-header">
+          <span class="cert-issuer">GOOGLE</span>
+          <span class="cert-badge">Verified</span>
         </div>
-        <div class="tl-card">
-          <div class="tl-role">Jr. Data Analyst</div>
-          <div class="tl-company">Kilowott (Nordic Intent HQ) · Porvorim, Goa</div>
-
-          <ul class="tl-achievements">
-            <li>
-              <strong>Serverless Cloud Pipelines:</strong> Architected zero-ETL data layers using Azure Synapse Serverless SQL over ADLS Gen2 Parquet files, handling schema drift and cutting cloud compute costs by 70%.
-            </li>
-            <li>
-              <strong>Enterprise Dashboarding:</strong> Designed and deployed 20+ interactive Power BI and Looker Studio dashboards utilizing Star Schema modeling and optimized DAX measures for campaign KPIs.
-            </li>
-            <li>
-              <strong>Tracking Infrastructure:</strong> Implemented server-side Google Tag Manager (sGTM) and GA4 event architectures across multi-brand websites, securing consistent conversion event capture.
-            </li>
-            <li>
-              <strong>Data Quality & Governance:</strong> Established automated SQL data validation procedures, reducing reporting anomalies and discrepancies by 30%.
-            </li>
-          </ul>
-
-          <div class="tl-tags">
-            <span>Azure Synapse</span><span>Power BI</span><span>ADLS Gen2</span><span>T-SQL</span><span>GA4</span><span>sGTM</span>
-          </div>
-        </div>
+        <h3 class="cert-title">Google Data Analytics Professional</h3>
+        <p class="cert-desc">Coursera · In-depth SQL, R, and Data Cleaning workflows.</p>
+        <button class="cert-view-btn">View Certificate ↗</button>
       </div>
 
-      <div class="tl-item" tabindex="0">
-        <div class="tl-left">
-          <div class="tl-date">Aug 2023 — Sep 2023</div>
-          <div class="tl-badge">Internship</div>
+      <!-- Cert 2 -->
+      <div class="cert-card" onclick="openCertModal('Advanced GA4 Implementation', 'certs/ga4-gtm.pdf')">
+        <div class="cert-header">
+          <span class="cert-issuer">UDEMY</span>
+          <span class="cert-badge">Verified</span>
         </div>
-        <div class="tl-card">
-          <div class="tl-role">Software Engineering Intern</div>
-          <div class="tl-company">Sierra Circuits India Pvt. Ltd. · Verna, Goa</div>
+        <h3 class="cert-title">Advanced GA4 & Tag Manager</h3>
+        <p class="cert-desc">Server-Side Tracking, Data Layers & Custom Conversions.</p>
+        <button class="cert-view-btn">View Certificate ↗</button>
+      </div>
 
-          <ul class="tl-achievements">
-            <li>
-              <strong>NLP Model Fine-Tuning:</strong> Built question-answering pipelines leveraging Transformer architectures (BERT, GPT-2) via Hugging Face for domain-specific text evaluation.
-            </li>
-            <li>
-              <strong>Evaluation Frameworks:</strong> Optimized hyperparameters and benchmarked models against manual validation sets.
-            </li>
-          </ul>
-
-          <div class="tl-tags">
-            <span>Python</span><span>BERT</span><span>GPT-2</span><span>Hugging Face</span><span>NLP</span>
-          </div>
+      <!-- Cert 3 -->
+      <div class="cert-card" onclick="openCertModal('Python Programming Certification', 'certs/python-cert.pdf')">
+        <div class="cert-header">
+          <span class="cert-issuer">LIBRA COMPUTERS</span>
+          <span class="cert-badge">Verified</span>
         </div>
+        <h3 class="cert-title">Python Programming Certification</h3>
+        <p class="cert-desc">Advanced Python Scripting, Data Structures & Logic.</p>
+        <button class="cert-view-btn">View Certificate ↗</button>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section class="section" id="skills">
-    <div class="section-label">03 / TECHNICAL SKILLS</div>
-    <h2 class="section-heading">Capabilities & Tooling</h2>
-
-    <div class="skills-wrapper">
-      <div class="skill-group">
-        <div class="skill-group-title">Cloud & Data Engineering</div>
-        <div class="skill-pills">
-          <span>Azure Data Lake Storage (ADLS Gen2)</span>
-          <span>Azure Synapse Serverless SQL</span>
-          <span>OPENROWSET & Schema Virtualization</span>
-          <span>T-SQL Data Modeling</span>
-          <span>Data Ingestion & Pipeline QA</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-title">BI & Data Visualization</div>
-        <div class="skill-pills">
-          <span>Power BI (Desktop / Service)</span>
-          <span>DAX (Calculated Measures & Time Intelligence)</span>
-          <span>Star Schema Data Modeling</span>
-          <span>Looker Studio</span>
-          <span>Automated KPI Reporting</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-title">Analytics & Tracking</div>
-        <div class="skill-pills">
-          <span>Google Analytics 4 (GA4)</span>
-          <span>Server-Side Tag Manager (sGTM)</span>
-          <span>Custom Conversion Measurement</span>
-          <span>E-commerce & Funnel Tracking</span>
-          <span>Attribution Modeling</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-title">Languages & Frameworks</div>
-        <div class="skill-pills">
-          <span>SQL (T-SQL, PostgreSQL)</span>
-          <span>Python (Pandas, NumPy, Scikit-Learn)</span>
-          <span>DAX</span>
-          <span>JavaScript (Tracking Scripts)</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS / CASE STUDIES -->
+  <!-- PROJECTS -->
   <section class="section" id="projects">
-    <div class="section-label">04 / CASE STUDIES</div>
+    <div class="section-label">03 / CASE STUDIES</div>
     <h2 class="section-heading">Featured Engineering Projects</h2>
-
     <div class="projects-grid">
-      
-      <!-- Project 1 -->
       <div class="project-card">
-        <div class="project-header">
-          <span class="project-num">CASE STUDY 01</span>
-          <span class="project-badge">Cloud Pipeline</span>
-        </div>
         <h3>Scalable Marketing Pipeline: Azure Synapse & Power BI</h3>
-        <p>
-          Architected a serverless virtualization layer over ADLS Gen2 to resolve daily Parquet schema drift. Built standardized T-SQL views using `OPENROWSET` and connected directly to Power BI Star Schema models.
-        </p>
-        
-        <div class="project-arch">
-          <code>[ADLS Gen2] ➔ [Synapse SQL Serverless] ➔ [Power BI Import Model]</code>
-        </div>
-
-        <div class="project-tags">
-          <span>Azure Synapse</span><span>T-SQL</span><span>Power BI</span><span>DAX</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/abiya-pardeshi" target="_blank" class="p-btn">View Code on GitHub →</a>
-        </div>
+        <p>Architected a serverless virtualization layer over ADLS Gen2 to resolve daily Parquet schema drift.</p>
+        <div class="project-tags"><span>Azure Synapse</span><span>T-SQL</span><span>Power BI</span></div>
       </div>
-
-      <!-- Project 2 -->
       <div class="project-card">
-        <div class="project-header">
-          <span class="project-num">CASE STUDY 02</span>
-          <span class="project-badge">Analytics Infra</span>
-        </div>
-        <h3>Server-Side Tracking Architecture for Conversion Accuracy</h3>
-        <p>
-          Deployed server-side Google Tag Manager (sGTM) containers to bypass ad-blocker loss and ITP browser restrictions. Standardized GA4 schema mapping across client properties to preserve attribution integrity.
-        </p>
-
-        <div class="project-arch">
-          <code>[Client Event] ➔ [sGTM Cloud Container] ➔ [GA4 API / Meta CAPI]</code>
-        </div>
-
-        <div class="project-tags">
-          <span>sGTM</span><span>GA4</span><span>JavaScript</span><span>Conversion API</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/abiya-pardeshi" target="_blank" class="p-btn">View Implementation Spec →</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- RESEARCH & CERTS -->
-  <section class="section" id="research">
-    <div class="section-label">05 / RESEARCH & CREDENTIALS</div>
-    <h2 class="section-heading">Publications & Certifications</h2>
-
-    <div class="research-layout">
-      <div class="pub-card">
-        <div class="pub-header">
-          <span class="pub-badge">Peer Reviewed Publication</span>
-          <span class="pub-journal">Springer Nature · Vol. 6, Art. 67 (2025)</span>
-        </div>
-        <h3 class="pub-title">"Optimized Deep Learning Framework for Cryptocurrency Price Prediction"</h3>
-        <p class="pub-body">
-          Authored peer-reviewed research analyzing neural network performance on complex time-series data using hybrid deep learning architectures and sentiment features.
-        </p>
-        <div class="pub-tags">
-          <span>Deep Learning</span><span>Time Series</span><span>Python</span><span>NLP</span>
-        </div>
-      </div>
-
-      <div class="certs-block">
-        <div class="certs-title">Industry Certifications</div>
-        <div class="cert-list">
-          <div class="cert-item">
-            <div class="cert-icon">G</div>
-            <div>
-              <div class="cert-name">Google Data Analytics Professional</div>
-              <div class="cert-meta">Coursera</div>
-            </div>
-          </div>
-          <div class="cert-item">
-            <div class="cert-icon">U</div>
-            <div>
-              <div class="cert-name">Advanced GA4 Implementation with GTM</div>
-              <div class="cert-meta">Udemy</div>
-            </div>
-          </div>
-          <div class="cert-item">
-            <div class="cert-icon">P</div>
-            <div>
-              <div class="cert-name">Python Programming Certification</div>
-              <div class="cert-meta">Libra Computers</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="edu-card">
-      <div class="edu-left">
-        <div class="edu-degree">Bachelor of Engineering: Computer Engineering</div>
-        <div class="edu-school">Agnel Institute of Technology and Design, Goa</div>
-      </div>
-      <div class="edu-right">
-        <div class="edu-meta-row">
-          <span>2020 – 2024</span>
-          <span class="edu-cgpa">CGPA 8.1 / 10</span>
-        </div>
-        <div class="edu-courses">Database Systems · Machine Learning · Data Structures & Algorithms · Distributed Computing</div>
+        <h3>Server-Side Tracking Architecture</h3>
+        <p>Deployed server-side Google Tag Manager (sGTM) containers to bypass ad-blocker loss.</p>
+        <div class="project-tags"><span>sGTM</span><span>GA4</span><span>JavaScript</span></div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="section contact-section" id="contact">
-    <div class="section-label">06 / CONTACT</div>
-
-    <div class="contact-inner">
-      <h2 class="contact-heading">Let's Discuss Data Initiatives</h2>
-      <p class="contact-sub">Available for full-time cloud data engineering and analytics roles.</p>
-
-      <div class="contact-cards">
-        <a href="mailto:abiyapardeshi05@gmail.com" class="contact-card">
-          <span class="cc-label">EMAIL</span>
-          <span class="cc-val">abiyapardeshi05@gmail.com</span>
-          <span class="cc-arrow">→</span>
-        </a>
-        <a href="tel:+918805780825" class="contact-card">
-          <span class="cc-label">PHONE</span>
-          <span class="cc-val">+91 8805780825</span>
-          <span class="cc-arrow">→</span>
-        </a>
-        <a href="https://linkedin.com/in/abiya-pardeshi" target="_blank" class="contact-card">
-          <span class="cc-label">LINKEDIN</span>
-          <span class="cc-val">linkedin.com/in/abiya-pardeshi</span>
-          <span class="cc-arrow">→</span>
-        </a>
+  <!-- VIEW-ONLY RESUME MODAL -->
+  <div id="resume-modal" class="modal-overlay" onclick="closeModalOnOuter(event, 'resume-modal')">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Abiya Pardeshi — Resume (View Only)</span>
+        <button class="modal-close" onclick="closeModal('resume-modal')">✕</button>
+      </div>
+      <div class="modal-body protect-view">
+        <iframe src="resume.pdf#toolbar=0&navpanes=0&scrollbar=0" class="pdf-frame" oncontextmenu="return false;"></iframe>
+        <div class="protect-overlay"></div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- VIEW-ONLY CERTIFICATE MODAL -->
+  <div id="cert-modal" class="modal-overlay" onclick="closeModalOnOuter(event, 'cert-modal')">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="cert-modal-title">Certificate Viewer</span>
+        <button class="modal-close" onclick="closeModal('cert-modal')">✕</button>
+      </div>
+      <div class="modal-body protect-view">
+        <iframe id="cert-iframe" src="" class="pdf-frame" oncontextmenu="return false;"></iframe>
+        <div class="protect-overlay"></div>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
-    <span class="footer-logo">ABIYA PARDESHI</span>
     <span>© 2026 Abiya Pardeshi</span>
-    <span>Data Engineering & Analytics Portfolio</span>
   </footer>
 
   <script src="script.js"></script>
