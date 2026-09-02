@@ -169,7 +169,7 @@
       <div class="solution-box">
         <p><strong>Automated Power BI Reports with Enterprise Row-Level Security (RLS)</strong></p>
         <p>
-          To solve the visibility and scaling challenge, we architected an automated, enterprise-grade Power BI reporting solution integrated with strict **Row-Level Security (RLS)**.
+          To solve the visibility and scaling challenge, we architected an automated, enterprise-grade Power BI reporting solution integrated with strict <strong>Row-Level Security (RLS) </strong>.
         </p>
         <ul>
           <li><strong>Role-Based Security Architecture:</strong> Embedded DAX-driven Row-Level Security (RLS) rules so that stakeholders, company executives, and departmental heads (e.g., Email Marketing leads vs. Sales leads) automatically see only the data relevant to their specific company and team permissions upon login.</li>
@@ -192,34 +192,10 @@
     <!-- ARCHITECTURE FLOW -->
     <section class="case-section">
       <h2>3. Pipeline Architecture</h2>
-      <div class="arch-diagram">
-========================================================================================================================
-                                    AZURE SYNAPSE TO POWER BI DATA PIPELINE
-========================================================================================================================
-
-  [ INGESTION ]                [ STORAGE ]                               [ PROCESSING ]
-+----------------+          +----------------+                      +---------------------+
-| 1. RAW DATA    |          | 2. ADLS GEN2   |                      | 3. SYNAPSE EXTERNAL |
-| GA4 / CRM /    | -------> | Parquet Files  | -------------------> |    DATA SOURCE &    |
-| Event Data     |          | Dynamic Columns|                      |    FILE FORMAT      |
-+----------------+          +----------------+                      +---------------------+
-                                                                               |
-                                                                               v
-  [ VIRTUALIZATION ]           [ SCHEMATIC RESOLUTION ]                  [ SYNAPSE QUERY ]
-+----------------+          +----------------+                      +---------------------+
-| 6. VIRTUAL     |          | 5. SCHEMA DRIFT|                      | 4. OPENROWSET       |
-|    BUSINESS    | <------- |    RESOLUTION  | <------------------- |    PARQUET QUERIES  |
-|    LAYER       |          | (ISNULL & Cast)|                      | (On-the-fly execution)
-+----------------+          +----------------+                      +---------------------+
-       |
-       v
-  [ VISUALIZATION ]            [ END USER ]
-+----------------+          +----------------+
-| 7. POWER BI    |          | 8. STAKEHOLDER |
-| Star Schema    | -------> |    INTERACTIVE |
-| & DAX Measures |          |    DASHBOARDS  |
-+----------------+          +----------------+
-      </div>
+        <div class="img-card">
+          <img src="pipeline_architecture.png" alt="pipeline_architecture" />
+          <div class="img-caption">Figure 1: Executive Marketing Overview — Dynamic KPI Cards, Time Intelligence Trendlines, and Campaign Performance.</div>
+        </div>
     </section>
 
     <!-- SQL CODE SHOWCASE -->
