@@ -141,26 +141,25 @@
   <main class="case-container">
     <a href="index.html#projects" class="back-link">← Back to Projects</a>
 
-    <h1 class="case-title">Scalable Marketing Analytics Pipeline: Azure Synapse & Power BI</h1>
+    <h1 class="case-title"> Microsoft Azure Synapse & Power BI Reports</h1>
 
     <div class="case-tags">
-      <span class="case-tag">Azure Synapse</span>
-      <span class="case-tag">ADLS Gen2</span>
-      <span class="case-tag">T-SQL Serverless</span>
+      <span class="case-tag">Microsoft Azure</span>
+      <span class="case-tag">Severless Pool</span>
+      <span class="case-tag">SQL </span>
       <span class="case-tag">Power BI</span>
-      <span class="case-tag">Parquet</span>
     </div>
 
     <!-- PROBLEM & SOLUTION SECTION -->
     <section class="case-section">
       <h2>1. Problem & Challenge</h2>
       <div class="problem-box">
-        <p><strong>The Core Issue: Dynamic Schema Drift</strong></p>
+        <p><strong>Multi-Company Data Consolidation & Stakeholder Reporting</strong></p>
         <p>
-          Incoming marketing and event Parquet partitions landing in Azure Data Lake Storage (ADLS Gen2) suffered from inconsistent file structures over time. Older daily files contained 5 standard columns, while newer partitions introduced extra columns (e.g., region and ad-group breakdowns), expanding to 7 columns.
+          The client approached us with massive volumes of historical and ongoing operational data spanning multiple portfolio companies. The dataset contained complex cross-channel metrics including marketing performance, overall sales, business growth, and ROI.
         </p>
         <p>
-          Directly querying these files via traditional table loads caused hard pipeline failures and broke downstream Power BI refresh cycles due to structural column mismatches.
+          Each individual company—as well as various specialized internal teams (Sales, Organic Social, Paid Social, Email Marketing, Website Ops, and Executive Business teams)—required distinct, localized views of performance data. The core challenge was centralizing this vast multi-company dataset without exposing confidential cross-brand metrics or departmental figures to unauthorized teams.
         </p>
       </div>
     </section>
