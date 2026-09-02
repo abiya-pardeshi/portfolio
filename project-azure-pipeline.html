@@ -194,8 +194,99 @@
       <h2>3. Pipeline Architecture</h2>
         <div class="img-card">
           <img src="pipeline_architecture.png" alt="pipeline_architecture" />
-          <div class="img-caption">Figure 1: Executive Marketing Overview — Dynamic KPI Cards, Time Intelligence Trendlines, and Campaign Performance.</div>
+          <div class="img-caption">Figure 1: Azure pipeline architecture showing automated data ingestion, ADLS Gen2 Parquet storage, Azure Synapse Serverless T-SQL schema drift virtualization, and RLS-secured Power BI reporting for enterprise stakeholders.</div>
         </div>
+      <!-- 8-STEP PIPELINE ARCHITECTURE SECTION -->
+    <section class="case-section">
+      <h2>3. End-to-End Pipeline Workflow (8-Step Architecture)</h2>
+      <p style="margin-bottom: 24px;">
+        A sequential breakdown of how data flows from raw source ingestion to serverless SQL virtualization and RLS-secured dashboard distribution:
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+        
+        <!-- Step 1 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 18px 20px; border-radius: 0 var(--r) var(--r) 0;">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; display: block; margin-bottom: 6px;">
+            STEP 01 — INGEST RAW EVENT DATA
+          </strong>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Stream raw JSON, CSV, and tracking logs from GA4, CRM, and cloud storage into Azure Synapse.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 18px 20px; border-radius: 0 var(--r) var(--r) 0;">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; display: block; margin-bottom: 6px;">
+            STEP 02 — PROCESS VIA PYSPARK
+          </strong>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Transform batch datasets using PySpark DataFrames within Azure Synapse Analytics Spark Notebooks and orchestrate runs via Synapse Data Pipelines.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 18px 20px; border-radius: 0 var(--r) var(--r) 0;">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; display: block; margin-bottom: 6px;">
+            STEP 03 — STAGE IN ADLS GEN2
+          </strong>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Land partitioned, high-compression Parquet files into structured folders within Azure Data Lake Storage Gen2.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 18px 20px; border-radius: 0 var(--r) var(--r) 0;">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; display: block; margin-bottom: 6px;">
+            STEP 04 — CONFIGURE SYNAPSE ENDPOINTS
+          </strong>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Define an <code>EXTERNAL DATA SOURCE</code> (pointing to ADLS Gen2) and an <code>EXTERNAL FILE FORMAT</code> (Parquet) inside Azure Synapse Serverless SQL.
+          </p>
+        </div>
+
+        <!-- Step 5 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 18px 20px; border-radius: 0 var(--r) var(--r) 0;">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; display: block; margin-bottom: 6px;">
+            STEP 05 — EXECUTE ON-THE-FLY QUERIES
+          </strong>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Run serverless T-SQL queries directly against raw Data Lake files using <code>OPENROWSET</code> without persistent data loading.
+          </p>
+        </div>
+
+        <!-- Step 6 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 18px 20px; border-radius: 0 var(--r) var(--r) 0;">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; display: block; margin-bottom: 6px;">
+            STEP 06 — RESOLVE SCHEMA DRIFT VIA VIEWS
+          </strong>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Build abstraction SQL views (<code>CREATE VIEW</code>) with <code>ISNULL()</code> and explicit casting to handle variable column counts across file partitions.
+          </p>
+        </div>
+
+        <!-- Step 7 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 18px 20px; border-radius: 0 var(--r) var(--r) 0;">
+          <strong style="color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; display: block; margin-bottom: 6px;">
+            STEP 07 — SERVE VIRTUALIZED BUSINESS LAYER
+          </strong>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Present unified T-SQL views as an analytical virtualization layer, shielding downstream reports from schema changes.
+          </p>
+        </div>
+
+        <!-- Step 8 -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-left: 4px solid #22c55e; padding: 18px 20px; border-radius: 0 var(--r) var(--r) 0;">
+          <strong style="color: #22c55e; font-family: var(--font-mono); font-size: 0.85rem; display: block; margin-bottom: 6px;">
+            STEP 08 — DELIVER RLS-SECURED DASHBOARDS
+          </strong>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            Connect Power BI to Synapse views, construct a Star Schema with DAX metrics, enforce Row-Level Security (RLS), and publish reports to the Power BI Service.
+          </p>
+        </div>
+
+      </div>
+    </section>
     </section>
 
     <!-- SQL CODE SHOWCASE -->
