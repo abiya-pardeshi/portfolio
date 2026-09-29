@@ -35,6 +35,7 @@
       margin-bottom: 32px;
       font-family: var(--font-mono);
       font-size: 0.8rem;
+      flex-wrap: wrap;
     }
     .case-tag {
       background: var(--bg-card);
@@ -95,6 +96,23 @@
       color: #38bdf8;
       overflow-x: auto;
       margin-top: 12px;
+      user-select: text; /* Enables text copying while remaining view-only */
+    }
+    .code-block pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .view-only-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.1);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      margin-bottom: 10px;
     }
     .gallery-grid {
       display: grid;
@@ -145,8 +163,8 @@
 
     <div class="case-tags">
       <span class="case-tag">Microsoft Azure</span>
-      <span class="case-tag">Severless Pool</span>
-      <span class="case-tag">SQL </span>
+      <span class="case-tag">Serverless Pool</span>
+      <span class="case-tag">SQL Dumps</span>
       <span class="case-tag">Power BI</span>
     </div>
 
@@ -165,11 +183,11 @@
     </section>
 
     <section class="case-section">
-      <h2>2. Proposed Solution  & Work Done</h2>
+      <h2>2. Proposed Solution & Work Done</h2>
       <div class="solution-box">
         <p><strong>Automated Power BI Reports with Enterprise Row-Level Security (RLS)</strong></p>
         <p>
-          To solve the visibility and scaling challenge, we architected an automated, enterprise-grade Power BI reporting solution integrated with strict <strong>Row-Level Security (RLS) </strong>.
+          To solve the visibility and scaling challenge, we architected an automated, enterprise-grade Power BI reporting solution integrated with strict <strong>Row-Level Security (RLS)</strong>.
         </p>
         <ul>
           <li><strong>Role-Based Security Architecture:</strong> Embedded DAX-driven Row-Level Security (RLS) rules so that stakeholders, company executives, and departmental heads (e.g., Email Marketing leads vs. Sales leads) automatically see only the data relevant to their specific company and team permissions upon login.</li>
@@ -192,11 +210,13 @@
     <!-- ARCHITECTURE FLOW -->
     <section class="case-section">
       <h2>3. Pipeline Architecture</h2>
-        <div class="img-card">
-          <img src="pipeline_architecture.png" alt="pipeline_architecture" />
-          <div class="img-caption">Figure 1: Azure pipeline architecture showing automated data ingestion, ADLS Gen2 Parquet storage, Azure Synapse Serverless T-SQL schema drift virtualization, and RLS-secured Power BI reporting for enterprise stakeholders.</div>
-        </div>
-      <!-- 8-STEP PIPELINE ARCHITECTURE SECTION -->
+      <div class="img-card">
+        <img src="pipeline_architecture.png" alt="pipeline_architecture" />
+        <div class="img-caption">Figure 1: Azure pipeline architecture showing automated data ingestion, ADLS Gen2 Parquet storage, Azure Synapse Serverless T-SQL schema drift virtualization, and RLS-secured Power BI reporting for enterprise stakeholders.</div>
+      </div>
+    </section>
+
+    <!-- 8-STEP PIPELINE ARCHITECTURE SECTION -->
     <section class="case-section">
       <h2>3. End-to-End Pipeline Workflow (8-Step Architecture)</h2>
       <p style="margin-bottom: 24px;">
@@ -287,33 +307,189 @@
 
       </div>
     </section>
-    </section>
 
-    <!-- SQL CODE SHOWCASE -->
+    <!-- UPDATED SQL CODE SHOWCASE (ONLY SQL DUMPS IN VIEW-ONLY MODE) -->
     <section class="case-section">
-      <h2>4. Schema Drift Implementation (T-SQL)</h2>
-      <p>Here is the core view abstraction created inside Azure Synapse Serverless SQL to handle variable column counts across raw Parquet files:</p>
+      <h2>4. T-SQL Dumps & View Definitions (View-Only Mode)</h2>
+      <p>The following view-only T-SQL dumps highlight the serverless virtualization views, Data Lake ingestion scripts, and analytical metric calculations implemented inside Azure Synapse SQL:</p>
       
+      <span class="view-only-badge">VIEW-ONLY DUMP — DATA LAKE & FUNNEL VIEWS</span>
       <div class="code-block">
-<pre>CREATE VIEW vw_marketing_analytics AS
-SELECT 
-    CAST(CampaignID AS VARCHAR(50))                      AS campaign_id,
-    CAST(Impressions AS INT)                             AS impressions,
-    CAST(Clicks AS INT)                                  AS clicks,
-    -- Normalizes missing columns in 5-column files vs 7-column files:
-    ISNULL(CAST(AdGroup AS VARCHAR(50)), 'Unassigned')   AS ad_group,
-    ISNULL(CAST(Region AS VARCHAR(50)), 'Global')        AS region
+<pre>-- Query: Create View over Single Parquet File
+CREATE OR ALTER VIEW [dbo].[view_FunnelRaw] AS
+SELECT
+    Date,
+    Traffic_source,
+    Campaign,
+    Media_type,
+    Paid__Organic,
+    Currency,
+    Cost,
+    Clicks,
+    Impressions
 FROM OPENROWSET(
-    BULK 'marketing/*/*/*.parquet',
-    DATA_SOURCE = 'AzureDataLakeStore',
+    BULK 'https://nestitdatalake01.blob.core.windows.net/datalake/raw/funnel/2025-07-01/funnel_data_2025_07.parquet',
     FORMAT = 'PARQUET'
-) WITH (
-    CampaignID VARCHAR(50),
-    Impressions INT,
-    Clicks INT,
-    AdGroup VARCHAR(50),
-    Region VARCHAR(50)
-) AS [result];</pre>
+) AS result;
+
+-- Query: View Display Execution
+SELECT *
+FROM [dbo].[view_FunnelRaw_03]
+ORDER BY [Date] ASC;
+
+-- Query: Create View over Multiple Data Lake Folders
+CREATE OR ALTER VIEW dbo.view_FunnelRaw
+AS
+SELECT
+    [Date],
+    Traffic_source,
+    Campaign,
+    Media_type,
+    Paid__Organic,
+    Currency,
+    Cost,
+    Clicks,
+    Impressions
+FROM OPENROWSET(
+    BULK 'https://nestitdatalake01.blob.core.windows.net/datalake/raw/funnel/*/*.parquet',
+    FORMAT = 'PARQUET'
+) AS r;
+
+-- Query: Filtered View for Paid Organic Traffic
+CREATE OR ALTER VIEW dbo.view_FunnelRaw_Paid
+AS
+SELECT
+    [Date],
+    Traffic_source,
+    Campaign,
+    Media_type,
+    Paid__Organic AS Paid_Organic,
+    Currency,
+    Cost,
+    Clicks,
+    Impressions
+FROM OPENROWSET(
+    BULK 'https://nestitdatalake01.blob.core.windows.net/datalake/raw/funnel/*/*.parquet',
+    FORMAT = 'PARQUET'
+) AS r
+WHERE
+    UPPER(LTRIM(RTRIM(Paid__Organic))) = 'PAID';
+
+-- Query: External Data Source Allocation
+CREATE EXTERNAL DATA SOURCE external_datalake
+WITH (
+    LOCATION   = 'https://nestitdatalake01.dfs.core.windows.net/datalake/raw/',
+    CREDENTIAL = msi_cred
+);</pre>
+      </div>
+
+      <br />
+
+      <span class="view-only-badge">VIEW-ONLY DUMP — CRM & METRICS ANALYTICS</span>
+      <div class="code-block">
+<pre>-- Query: Won Digital Leads & Closed Opportunities
+SELECT
+    o.Opportunity_BK,
+    o.Stage,
+    o.Status,
+    o.Custom_Page_Url,
+    ol.Opportunity_SK
+FROM dbo.OpportunityView o
+INNER JOIN dbo.OrderLineView ol
+    ON o.Opportunity_BK = ol.Opportunity_SK
+WHERE
+    o.Custom_Page_Url IS NOT NULL
+    AND utm_content = 'ad11_leads_docuware_sat-skrivare_image_people'
+    AND (
+        o.Status LIKE '%Vunnen%'
+        OR o.Stage LIKE '%Vunnen%'
+    );
+
+-- Query: Customer Acquisition Cost (CAC)
+SELECT
+    f.Total_Marketing_Spend,
+    c.New_Customers,
+    f.Total_Marketing_Spend * 1.0 / NULLIF(c.New_Customers, 0) AS CAC
+FROM
+    (SELECT SUM(cost) AS Total_Marketing_Spend
+     FROM dbo.view_FunnelRaw_Paid01
+     WHERE date BETWEEN '2026-01-01' AND '2027-01-01' 
+     AND Nestit_Company = 'Docuware') f,
+    (SELECT COUNT(*) AS New_Customers
+     FROM dbo.OpportunityView o
+     INNER JOIN dbo.OrderLineView ol ON o.Opportunity_BK = ol.Opportunity_SK
+     WHERE o.Custom_Page_Url IS NOT NULL
+     AND (o.Status LIKE '%Vunnen%' OR o.Stage LIKE '%Vunnen%')
+     AND o.Source_Updated_Timestamp BETWEEN '2026-01-01' AND '2027-01-01') c;
+
+-- Query: Marketing ROI Calculation
+SELECT
+    f.Total_Marketing_Spend,
+    r.Revenue_From_Marketing,
+    r.Revenue_From_Marketing - f.Total_Marketing_Spend AS Marketing_Profit,
+    ROUND(
+        (r.Revenue_From_Marketing - f.Total_Marketing_Spend) * 1.0
+        / NULLIF(f.Total_Marketing_Spend, 0),
+        2
+    ) AS Marketing_ROI
+FROM
+    (SELECT SUM(cost) AS Total_Marketing_Spend
+     FROM dbo.view_FunnelRaw_Paid01
+     WHERE date BETWEEN '2026-01-01' AND '2027-01-01'
+     AND Nestit_Company = 'Docuware') f,
+    (SELECT SUM(ol.line_amount) AS Revenue_From_Marketing
+     FROM dbo.OpportunityView o
+     INNER JOIN dbo.OrderLineView ol ON o.Opportunity_BK = ol.Opportunity_SK
+     WHERE o.Custom_Page_Url IS NOT NULL
+     AND (o.Status LIKE '%Vunnen%' OR o.Stage LIKE '%Vunnen%')
+     AND o.Source_Updated_Timestamp BETWEEN '2026-01-01' AND '2027-01-01') r;
+
+-- Query: Return on Ad Spend (ROAS)
+SELECT
+    f.Total_Marketing_Spend,
+    r.Revenue_From_Marketing,
+    ROUND(
+        r.Revenue_From_Marketing * 1.0 / NULLIF(f.Total_Marketing_Spend, 0),
+        2
+    ) AS ROAS
+FROM
+    (SELECT SUM(cost) AS Total_Marketing_Spend
+     FROM dbo.view_FunnelRaw_Paid01
+     WHERE date BETWEEN '2026-01-01' AND '2027-01-01'
+     AND Nestit_Company = 'Docuware') f,
+    (SELECT SUM(ol.line_amount) AS Revenue_From_Marketing
+     FROM dbo.OpportunityView o
+     INNER JOIN dbo.OrderLineView ol ON o.Opportunity_BK = ol.Opportunity_SK
+     WHERE o.Custom_Page_Url IS NOT NULL
+     AND (o.Status LIKE '%Vunnen%' OR o.Stage LIKE '%Vunnen%')
+     AND o.Source_Updated_Timestamp BETWEEN '2026-01-01' AND '2027-01-01') r;
+
+-- Query: Cost per Sales Accepted Lead (SAL)
+SELECT
+    f.Total_Marketing_Spend,
+    s.SAL_Count,
+    ROUND(
+        f.Total_Marketing_Spend * 1.0 / NULLIF(s.SAL_Count, 0),
+        2
+    ) AS Cost_Per_SAL
+FROM
+    (
+        SELECT SUM(Cost) AS Total_Marketing_Spend
+        FROM dbo.view_FunnelRaw_Paid01
+        WHERE [Date] >= '2026-01-01' AND [Date] < '2027-01-01'
+        AND Nestit_Company = 'Docuware'
+    ) f
+CROSS JOIN
+    (
+        SELECT COUNT(DISTINCT o.Opportunity_BK) AS SAL_Count
+        FROM dbo.OpportunityView o
+        LEFT JOIN dbo.CompanyViewClone c ON o.Company_SK = c.Company_BK
+        WHERE o.Company_SK IS NOT NULL
+        AND o.Company_SK <> '0'
+        AND c.Custom_SAL = 1
+        AND o.Source_Updated_Timestamp >= '2026-01-01'
+        AND o.Source_Updated_Timestamp < '2027-01-01'
+    ) s;</pre>
       </div>
     </section>
 
