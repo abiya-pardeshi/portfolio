@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Looker Studio Reports — Abiya Pardeshi</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Two-Column Split Layout */
+    .split-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+    .page-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .page-tags {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 32px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .page-tag {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: var(--r);
+      color: var(--text-muted);
+    }
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 36px;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .split-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Left Column Styling */
+    .content-col .case-section {
+      margin-bottom: 36px;
+    }
+    .content-col h2 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .content-col p, .content-col li {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .info-box {
+      background: rgba(56, 189, 248, 0.05);
+      border-left: 3px solid #38bdf8;
+      padding: 18px;
+      border-radius: 0 var(--r) var(--r) 0;
+      margin-bottom: 24px;
+    }
+    .view-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.1);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+    }
+    /* Right Column PDF Styling */
+    .reports-col {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: sticky;
+      top: 20px;
+    }
+    .pdf-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .pdf-header {
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pdf-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+    .pdf-viewer-wrapper {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: #1e1e1e;
+    }
+    .pdf-viewer {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* Shield overlay to block right click and drag */
+    .view-only-shield {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* Allows scrolling inside PDF frame */
+    }
+    .disclaimer-box {
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      padding: 16px;
+      border-radius: var(--r);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">ABIYA PARDESHI<span class="dot">.</span></a>
+    <a href="index.html" class="nav-cta">← Back to Portfolio</a>
+  </nav>
+
+  <main class="split-container">
+    <a href="index.html#projects" class="back-link">← Back to Projects</a>
+
+    <h1 class="page-title">Looker Studio Interactive Reports</h1>
+
+    <div class="page-tags">
+      <span class="page-tag">Google Looker Studio</span>
+      <span class="page-tag">Business Intelligence</span>
+      <span class="page-tag">Marketing Analytics</span>
+      <span class="page-tag">View-Only PDF Archive</span>
+    </div>
+
+    <!-- TWO CONTAINER SPLIT GRID -->
+    <div class="split-grid">
+
+      <!-- LEFT CONTAINER: CONTENT & METRICS -->
+      <div class="content-col">
+        <span class="view-badge">VIEW-ONLY REPORT SUITE</span>
+        
+        <section class="case-section">
+          <h2>1. Overview & Objective</h2>
+          <div class="info-box">
+            <p><strong>Executive Marketing & Web Analytics Dashboards</strong></p>
+            <p>
+              This collection showcases 4 key Google Looker Studio reports engineered for cross-channel marketing tracking, audience behavior analysis, sales conversions, and business health monitoring.
+            </p>
+          </div>
+        </section>
+
+        <section class="case-section">
+          <h2>2. Report Breakdown & Features</h2>
+          
+          <p><strong>Report 01 — Cross-Channel Marketing ROI</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>Consolidates paid ad performance across Google Ads, Meta Ads, and LinkedIn.</li>
+            <li>Tracks total spend, customer acquisition costs (CAC), and overall ROAS.</li>
+          </ul>
+
+          <p><strong>Report 02 — Executive Revenue & Sales Pipeline</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>Presents high-level business revenue trends, profit margins, and deal win rates.</li>
+            <li>Includes dynamic date-range filtration and regional performance maps.</li>
+          </ul>
+
+          <p><strong>Report 03 — Website Traffic & User Journeys</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>Integrates directly with Google Analytics 4 (GA4) event streams.</li>
+            <li>Evaluates session durations, landing page bounce rates, and conversion funnels.</li>
+          </ul>
+
+          <p><strong>Report 04 — E-commerce & Conversion Performance</strong></p>
+          <ul style="margin-left: 20px;">
+            <li>Detailed funnel analytics mapping cart additions, checkouts, and completed orders.</li>
+            <li>Analyzes customer retention and repeat purchase frequencies over time.</li>
+          </ul>
+        </section>
+
+        <section class="case-section">
+          <h2>3. Key Technologies Used</h2>
+          <ul style="margin-left: 20px;">
+            <li><strong>Data Connectors:</strong> Google Analytics 4, BigQuery, Google Sheets, PostgreSQL.</li>
+            <li><strong>Calculated Fields:</strong> Custom REGEX extraction, CASE WHEN logic, and custom metrics.</li>
+            <li><strong>Design Standards:</strong> Custom color palettes matching enterprise design systems.</li>
+          </ul>
+        </section>
+
+        <div class="disclaimer-box">
+          <strong>Data Privacy Disclaimer:</strong> All reports embedded on this page are strictly set to <strong>View-Only</strong>. Personal data, company identifiers, and sensitive enterprise KPIs have been fully sanitized or generated using mock datasets.
+        </div>
+      </div>
+
+      <!-- RIGHT CONTAINER: 4 VIEW-ONLY PDF REPORTS -->
+      <div class="reports-col">
+
+        <!-- REPORT 1 -->
+        <div class="pdf-card">
+          <div class="pdf-header">
+            <span class="pdf-title">01. Cross-Channel Marketing Report.pdf</span>
+            <span class="view-badge" style="margin: 0;">READ-ONLY</span>
+          </div>
+          <div class="pdf-viewer-wrapper">
+            <object class="pdf-viewer" data="reports/marketing_overview_report.pdf#toolbar=0&navpanes=0&scrollbar=1" type="application/pdf">
+              <p style="padding: 20px; color: var(--text-muted);">
+                PDF Preview unavailable. File: <code>marketing_overview_report.pdf</code>
+              </p>
+            </object>
+            <div class="view-only-shield"></div>
+          </div>
+        </div>
+
+        <!-- REPORT 2 -->
+        <div class="pdf-card">
+          <div class="pdf-header">
+            <span class="pdf-title">02. Executive Revenue & Sales Pipeline.pdf</span>
+            <span class="view-badge" style="margin: 0;">READ-ONLY</span>
+          </div>
+          <div class="pdf-viewer-wrapper">
+            <object class="pdf-viewer" data="reports/executive_revenue_report.pdf#toolbar=0&navpanes=0&scrollbar=1" type="application/pdf">
+              <p style="padding: 20px; color: var(--text-muted);">
+                PDF Preview unavailable. File: <code>executive_revenue_report.pdf</code>
+              </p>
+            </object>
+            <div class="view-only-shield"></div>
+          </div>
+        </div>
+
+        <!-- REPORT 3 -->
+        <div class="pdf-card">
+          <div class="pdf-header">
+            <span class="pdf-title">03. Website Traffic & GA4 Analytics.pdf</span>
+            <span class="view-badge" style="margin: 0;">READ-ONLY</span>
+          </div>
+          <div class="pdf-viewer-wrapper">
+            <object class="pdf-viewer" data="reports/ga4_traffic_analytics.pdf#toolbar=0&navpanes=0&scrollbar=1" type="application/pdf">
+              <p style="padding: 20px; color: var(--text-muted);">
+                PDF Preview unavailable. File: <code>ga4_traffic_analytics.pdf</code>
+              </p>
+            </object>
+            <div class="view-only-shield"></div>
+          </div>
+        </div>
+
+        <!-- REPORT 4 -->
+        <div class="pdf-card">
+          <div class="pdf-header">
+            <span class="pdf-title">04. E-Commerce Conversion Performance.pdf</span>
+            <span class="view-badge" style="margin: 0;">READ-ONLY</span>
+          </div>
+          <div class="pdf-viewer-wrapper">
+            <object class="pdf-viewer" data="reports/ecommerce_conversion_report.pdf#toolbar=0&navpanes=0&scrollbar=1" type="application/pdf">
+              <p style="padding: 20px; color: var(--text-muted);">
+                PDF Preview unavailable. File: <code>ecommerce_conversion_report.pdf</code>
+              </p>
+            </object>
+            <div class="view-only-shield"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>© 2026 Abiya Pardeshi</span>
+  </footer>
+
+</body>
+</html>
